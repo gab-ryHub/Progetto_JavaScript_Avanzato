@@ -5,7 +5,7 @@ const prompt = PromptSync();
 
 let scelta;
 let registro_atleti;
-let registro_competizioni;
+let registro_gare;
 let classifica_campionato;
 
 do{
@@ -24,6 +24,13 @@ do{
             }
             break;
         case 2:
+            let n_gare = Number.parseInt(prompt("Numero di gare del campionato: "));
+            registro_gare = Array.of(n_gare);
+
+            for(let i = 0; i < n_gare; i++){
+                console.log(`Gara ${i+1} :`);
+                registro_gare[i] = u.Registra_Gare(registro_atleti);
+            }
             break;
         case 3:
             break;
