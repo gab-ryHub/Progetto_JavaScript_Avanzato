@@ -36,9 +36,12 @@ do{
             }
             break;
         case 3:
-            registro_gare.forEach(gare =>{
-                punteggi.push(gare.Punteggi);
+            //modificare il case in modo che stampi la classifica e non solo i puntggi (riprendere ciò che c'è nel case 5)
+            registro_gare.forEach((gare, i) =>{
+                let temp = [...gare.Partecipanti];
+                punteggi[i] =  temp.map(p => p.Punteggi_Atleti);
             })
+            console.log(punteggi);
             break;
         case 4:
             console.log("\nMedia punteggi per ogni gara: ");
@@ -47,8 +50,13 @@ do{
             })
             break;
         case 5:
+            //funzionante ma deve essere implementato nel case 3 e non nel 5. aggiungere la percentuale di gare vinte
+            u.Percentule_Gare(registro_gare);
             break;
         case 6:
+            console.log(registro_atleti);
+
+            console.log(registro_gare.forEach(gara => console.log(gara.Partecipanti)));
             break;
         case 7:
             console.log("\nFine programma.");
