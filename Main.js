@@ -7,7 +7,7 @@ let scelta;
 let registro_atleti;
 let registro_gare;
 let classifica_campionato;
-let punteggi;
+let punteggi; 
 
 do{
     console.log("\nMenù.\n 1)Registrazione dati anagrafici.\n 2)Registrazione gare e concorrenti.\n 3)Creazione/Aggiornamento classifica.\n 4)Calcolo della media dei punteggi.\n 5)Maggiori info.\n 6)Visualizza registro utenti.\n 7)Uscita.");
@@ -40,8 +40,8 @@ do{
             registro_gare.forEach((gare, i) =>{
                 let temp = [...gare.Partecipanti];
                 punteggi[i] =  temp.map(p => p.Punteggi_Atleti);
-            })
-            console.log(punteggi);
+            });
+            classifica_campionato = [...u.Crea_Classifica(registro_gare)];
             break;
         case 4:
             console.log("\nMedia punteggi per ogni gara: ");
@@ -50,8 +50,27 @@ do{
             })
             break;
         case 5:
-            //funzionante ma deve essere implementato nel case 3 e non nel 5. aggiungere la percentuale di gare vinte
-            u.Percentule_Gare(registro_gare);
+            console.log("\nMenù.\n 1-Percentuale gare vinte.\n 2-Piazzamenti sul podio.\n 3-Uscita");
+            let filtro = Number.parseInt(prompt("Fai una scelta: "));
+
+            console.log("\n");
+            
+            switch(filtro){
+                case 1:
+                    let atleta = prompt("Nome atleta di cui visualizzare le gare vinte: ");
+                    //aggiungere controllo con registro degli atleti
+
+                    let vittorie = u.Percentuale_Gare(classifica_campionato, atleta);
+                    console.log(`Numero di gare vinte dall'atleta ${atleta} : ${vittorie}.\nPercentuale sul totale: ${(vittorie/registro_gare.length)*100}`);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    console.log("Uscita menù info.");
+                    break;
+            }
+
+            //aggiungere le posizioni sul podio
             break;
         case 6:
             console.log(registro_atleti);

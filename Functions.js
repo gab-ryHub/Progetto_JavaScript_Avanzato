@@ -30,6 +30,18 @@ export function Registra_Gare(registro_atleti){
     }
 }
 
+export function Crea_Classifica(registro_gare){
+    let podio = new Array;
+
+    registro_gare.forEach((gare, i) =>{
+        let ordinati = [...gare.Partecipanti];
+
+        podio[i] = ordinati.sort((x, y) => y.Punteggi_Atleti - x.Punteggi_Atleti);
+    })
+
+    return podio;
+}
+
 export function Calcola_Media(punteggi){
     //implementare successivamente una media per categoria
 
@@ -44,20 +56,18 @@ export function Calcola_Media(punteggi){
     return media;   //restituisce la media dei punteggi in una singola gara
 }
 
-export function Percentule_Gare(registro_gare){
-    let podio = new Array;
 
-    registro_gare.forEach((gare, i) =>{
-        let ordinati = [...gare.Partecipanti];
+export const Percentuale_Gare = function(classifica_campionato, atleta){
+    let gare_vinte = 0;
+    classifica_campionato.forEach(classifica =>{
+        
+        let indice = classifica.findIndex(x => x.Atleti_Partecipanti.Nome == atleta);
 
-        podio[i] = ordinati.sort((x, y) => y.Punteggi_Atleti - x.Punteggi_Atleti);
+        if(indice == 0)
+            gare_vinte++;
     })
-
-    return podio;
+    return gare_vinte;
 }
-
-
-
 
 
 const Registra_Partecipanti = (registro_atleti) =>{
@@ -71,7 +81,6 @@ const Registra_Partecipanti = (registro_atleti) =>{
 
     return partecipanti;
 }
-
 
 const Registra_Punteggi = (partecipanti) =>{
     let punteggi = new Array(partecipanti.length);
