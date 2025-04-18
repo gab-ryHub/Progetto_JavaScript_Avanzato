@@ -4,10 +4,10 @@ import * as u from "./Functions.js";
 const prompt = PromptSync();
 
 let scelta;
-let registro_atleti;
-let registro_gare;
-let classifica_campionato;
-let punteggi;
+let registro_atleti = new Array();
+let registro_gare = new Array();
+let classifica_campionato = new Array();
+let punteggi = new Array();
 
 do{
     console.log("\nMenù.\n 1)Registrazione dati anagrafici.\n 2)Registrazione gare e concorrenti.\n 3)Creazione/Aggiornamento classifica.\n 4)Calcolo della media dei punteggi.\n 5)Maggiori info.\n 6)Visualizza registro utenti.\n 7)Uscita.");
@@ -16,32 +16,55 @@ do{
 
     switch(scelta){
         case 1:
-            let n_atleti = Number.parseInt(prompt("Numero di atleti partecipanti al campionato:"));
-            registro_atleti = new Array(n_atleti);
+            //aggiungere controllo per verificare se un atleta è già stato iscritto al campionato
+            let n_atleti;
 
-            for(let i = 0; i < n_atleti; i++){
-                console.log(`\nAtleta ${i+1} :`);
-                registro_atleti[i] = u.Registra_Atleti();
+            if(registro_atleti == null){
+                n_atleti = Number.parseInt(prompt("Numero di atleti partecipanti al campionato:"));
+
+                for(let i = 0; i < n_atleti; i++){
+                    console.log(`\nAtleta ${i+1} :`);
+                    registro_atleti[i] = u.Registra_Atleti();
+                }
+            }
+            else{
+                n_atleti = Number.parseInt(prompt("Numero di nuovi atleti da aggiungere al campionato:"));
+                let atleti_iscritti = registro_atleti.length;
+                
+                for(let i = atleti_iscritti; i < (atleti_iscritti + n_atleti); i++){
+                    console.log(`\nAtleta ${i+1} :`);
+                    registro_atleti[i] = u.Registra_Atleti();
+                }
             }
             break;
         case 2:
-            let n_gare = Number.parseInt(prompt("Numero di gare del campionato: "));
-            
-            registro_gare = new Array(n_gare);
-            punteggi =  new Array(n_gare);
-            
-            for(let i = 0; i < n_gare; i++){
-                console.log(`\nGara ${i+1} :`);
-                registro_gare[i] = u.Registra_Gare(registro_atleti);
+            let n_gare;
+
+            if(registro_gare == null){
+                n_gare = Number.parseInt(prompt("Numero di gare del campionato: "));
+                
+                
+                for(let i = 0; i < n_gare; i++){
+                    console.log(`\nGara ${i+1} :`);
+                    registro_gare[i] = u.Registra_Gare(registro_atleti);
+                }
+            }
+            else{
+                n_gare = Number.parseInt(prompt("Numero di nuove gare del campionato da registrare: "));
+                let gare_registrate = registro_gare.length;
+                
+                for(let i = gare_registrate; i < (gare_registrate + n_gare); i++){
+                    console.log(`\nGara ${i+1} :`);
+                    registro_gare[i] = u.Registra_Gare(registro_atleti);
+                }
             }
             break;
         case 3:
-            //modificare il case in modo che stampi la classifica e non solo i puntggi (riprendere ciò che c'è nel case 5)
             registro_gare.forEach((gare, i) =>{
                 let temp = [...gare.Partecipanti];
                 punteggi[i] =  temp.map(p => p.Punteggi_Atleti);
             });
-            classifica_campionato = [...u.Crea_Classifica(registro_gare)];
+            classifica_campionato.push(...u.Crea_Classifica(registro_gare));
             break;
         case 4:
             console.log("\nMedia punteggi per ogni gara: ");
@@ -52,6 +75,7 @@ do{
         case 5:
             let filtro;
             do{
+                //aggiungere il controllo che permette di aggiornare automaticamente a classifica se viene aggiunta una gara
                 console.log("\nMenù.\n 1-Percentuale gare vinte.\n 2-Piazzamenti sul podio.\n 3-Numero piazzamenti sul podio.\n 4-Uscita");
                 filtro = Number.parseInt(prompt("Fai una scelta: "));
 
