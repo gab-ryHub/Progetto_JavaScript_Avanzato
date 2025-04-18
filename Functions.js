@@ -69,6 +69,32 @@ export const Percentuale_Gare = function(classifica_campionato, atleta){
     return gare_vinte;
 }
 
+export const Posizioni_Podio = function(classifica_campionato, atleta){
+    let cont = 1;
+    classifica_campionato.forEach(classifica =>{
+        
+        let indice = classifica.findIndex(x => x.Atleti_Partecipanti.Nome == atleta);
+
+        console.log(`L'atleta si è posizionato ${indice + 1}° nella ${cont}° gara.`);
+        cont++;
+    })
+}
+
+export const Numero_Piazzamenti = function(classifica_campionato, atleta){
+    let dentro = 0;
+    let fuori = 0;
+    classifica_campionato.forEach(classifica =>{
+        
+        let indice = classifica.findIndex(x => x.Atleti_Partecipanti.Nome == atleta);
+
+        if(indice <= 3)
+            dentro++;
+        else
+            fuori++;
+    })
+    console.log(`Atleta ${atleta}.\n Numero di piazzamenti sul podio: ${dentro}.\n Numero di piazzamenti fuori dal podio: ${fuori}.`);
+}
+
 
 const Registra_Partecipanti = (registro_atleti) =>{
     let partecipanti = new Array();

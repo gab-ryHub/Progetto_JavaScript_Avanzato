@@ -7,7 +7,7 @@ let scelta;
 let registro_atleti;
 let registro_gare;
 let classifica_campionato;
-let punteggi; 
+let punteggi;
 
 do{
     console.log("\nMenù.\n 1)Registrazione dati anagrafici.\n 2)Registrazione gare e concorrenti.\n 3)Creazione/Aggiornamento classifica.\n 4)Calcolo della media dei punteggi.\n 5)Maggiori info.\n 6)Visualizza registro utenti.\n 7)Uscita.");
@@ -50,31 +50,42 @@ do{
             })
             break;
         case 5:
-            console.log("\nMenù.\n 1-Percentuale gare vinte.\n 2-Piazzamenti sul podio.\n 3-Uscita");
-            let filtro = Number.parseInt(prompt("Fai una scelta: "));
+            let filtro;
+            do{
+                console.log("\nMenù.\n 1-Percentuale gare vinte.\n 2-Piazzamenti sul podio.\n 3-Numero piazzamenti sul podio.\n 4-Uscita");
+                filtro = Number.parseInt(prompt("Fai una scelta: "));
 
-            console.log("\n");
-            
-            switch(filtro){
-                case 1:
-                    let atleta = prompt("Nome atleta di cui visualizzare le gare vinte: ");
-                    //aggiungere controllo con registro degli atleti
+                console.log("\n");
+                
+                switch(filtro){
+                    case 1:
+                        let atleta = prompt("Nome atleta di cui visualizzare le gare vinte: ");
+                        //aggiungere controllo con registro degli atleti
 
-                    let vittorie = u.Percentuale_Gare(classifica_campionato, atleta);
-                    console.log(`Numero di gare vinte dall'atleta ${atleta} : ${vittorie}.\nPercentuale sul totale: ${(vittorie/registro_gare.length)*100}`);
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    console.log("Uscita menù info.");
-                    break;
-            }
-
-            //aggiungere le posizioni sul podio
+                        let vittorie = u.Percentuale_Gare(classifica_campionato, atleta);
+                        console.log(`Numero di gare vinte dall'atleta ${atleta} : ${vittorie}.\nPercentuale sul totale: ${(vittorie/registro_gare.length)*100}%`);
+                        break;
+                    case 2:
+                        let atleta_2 = prompt("Nome atleta di cui visualizzare i piazzamenti sul podio (dentro e fuori) per ogni gara: ");
+                        //aggiungere controllo con registro degli atleti
+                        
+                        console.log(`Posizioni sul podio.\n`);
+                        u.Posizioni_Podio(classifica_campionato, atleta_2);
+                        break;
+                    case 3:
+                        for(let i of registro_atleti){
+                            let atleta = i.Nome;
+                            u.Numero_Piazzamenti(classifica_campionato, atleta);
+                        }
+                        break;
+                    case 4:
+                        console.log("Uscita menù info.");
+                        break;
+                }
+            }while(filtro != 4);
             break;
         case 6:
             console.log(registro_atleti);
-
             console.log(registro_gare.forEach(gara => console.log(gara.Partecipanti)));
             break;
         case 7:
