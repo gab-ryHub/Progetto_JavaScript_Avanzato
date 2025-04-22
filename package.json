@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "main": "Functions.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "doc": "jsdoc -c Documentazione.json"
   },
   "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "prompt-sync": "^4.2.0"
-  }
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.4"
+  },
+  "description": ""
 }
