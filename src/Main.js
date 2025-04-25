@@ -83,7 +83,7 @@ do{
                     punteggi[i] =  temp.map(p => p.Punteggi_Atleti);
                 });
                 classifica_campionato.push(...u.Crea_Classifica(registro_gare));
-                console.log("Classifica aggiornata con successo.");
+                console.log("Classifica creata/aggiornata con successo. Ricordare di aggiornare la classifica ad ogni variazione sui registri.");
             }
             break;
         case 4:
