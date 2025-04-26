@@ -98,7 +98,6 @@ do{
             if(registro_atleti != null && registro_gare != null && classifica_campionato != null){
                 let filtro;
                 do{
-                    //aggiungere il controllo che permette di aggiornare automaticamente a classifica se viene aggiunta una gara
                     console.log("\nMenù.\n 1-Percentuale gare vinte.\n 2-Piazzamenti sul podio.\n 3-Numero piazzamenti sul podio.\n 4-Uscita");
                     filtro = Number.parseInt(prompt("Fai una scelta: "));
 
